@@ -1,0 +1,30 @@
+package com.ou.mtechminiproject.sandeep.hr;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+import org.xml.sax.helpers.DefaultHandler;
+
+public class PropertiesHandler extends DefaultHandler 
+{
+    private static ResourceBundle scmBundle = null;
+
+    static {
+        scmBundle = ResourceBundle.getBundle("HRIS");
+    }
+ 
+ 
+  public PropertiesHandler()
+  {
+  }
+  
+      public static final String getProperty(String propertyName) {
+        String propertyValue = "";
+
+        try {
+            propertyValue = scmBundle.getString(propertyName);
+        } catch (MissingResourceException mrex) {
+            System.out.println("Property : " + propertyName + ": not Found :" + mrex.getCause());
+        }
+
+        return propertyValue.trim();
+    }
+}

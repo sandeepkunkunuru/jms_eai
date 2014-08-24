@@ -1,0 +1,8 @@
+package com.ou.mtechminiproject.sandeep.hr;
+
+public class ParseEmployeeRecord 
+{
+  public ParseEmployeeRecord()
+  {
+  }
+}

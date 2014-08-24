@@ -1,0 +1,69 @@
+package com.ou.mtechminiproject.sandeep.hr;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class EmployeeRecordHandler 
+{
+  public EmployeeRecordHandler()
+  {
+  }
+  
+  public static int createOrUpdateEmployeeRecord(EmployeeBean emp){
+  
+    StringBuffer empXMLRecord = new StringBuffer("<Employee>");
+    
+    empXMLRecord.append("<FirstName>"+emp.getFirstName() +"</FirstName>");
+    empXMLRecord.append("<MiddleName>"+emp.getMiddleName() +"</MiddleName>");
+    empXMLRecord.append("<LastName>"+emp.getLastName() +"</LastName>");
+    empXMLRecord.append("<Address>"+emp.getAddress() +"</Address>");
+    empXMLRecord.append("<Designation>"+emp.getDesignation() +"</Designation>");
+    empXMLRecord.append("<Gender>"+emp.getGender() +"</Gender>");
+    empXMLRecord.append("<JoiningDate>"+emp.getJoiningDate() +"</JoiningDate>");
+    empXMLRecord.append("</Employee>");
+    
+   return generateXMLFile(empXMLRecord.toString()); 
+    
+  }
+  
+  public static int generateXMLFile(String xmlContent){  
+
+    File[] xmlFiles = Utility.xmlDbDir.listFiles(Utility.xmlFileFilter);
+    int countOfFiles = xmlFiles.length;
+        
+    try{
+        String newFileName = Utility.xmlDbDir.getAbsolutePath()+"/"+(++countOfFiles) + ".xml";
+        File file = new File(newFileName);
+        if (!file.exists()) {
+          file.createNewFile();
+        }
+        FileWriter filewriter = new FileWriter(file, false);
+        filewriter.write(xmlContent);
+        
+        filewriter.close();
+        
+        return countOfFiles;     
+    } catch (IOException ioe){
+      ioe.printStackTrace();
+      
+      return -1;
+    }
+  }
+  
+  public static void deleteEmployeeDetails(int empId){
+    File obsEmpRec = new File(Utility.xmlDbDir.getAbsolutePath()+"/"+empId+".xml");
+  
+    obsEmpRec.delete();  
+  }
+  
+  public static EmployeeBean getEmployeeDetails(int empId){
+   
+    XMLFileHandler xmlHandler = new XMLFileHandler();
+    ParseEmployeeRecord parser = new ParseEmployeeRecord(xmlHandler);
+    
+    Utility.empBean = new EmployeeBean();
+    parser.parse(Utility.xmlDbDir.getAbsolutePath()+"/"+empId+".xml");
+    
+    return Utility.empBean;
+  }
+}

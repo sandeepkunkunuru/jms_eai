@@ -1,0 +1,46 @@
+package com.ou.mtechminiproject.sandeep.hr;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+public class XMLFileHandler extends DefaultHandler 
+{
+  public XMLFileHandler()
+  {
+  }
+  
+  /**
+   * Receive notification of the start of an element.
+   * @param namespaceURI - The Namespace URI, or the empty string if the element has no Namespace URI or if Namespace processing is not being performed.
+   * @param localName - The local name (without prefix), or the empty string if Namespace processing is not being performed.
+   * @param qName - The qualified name (with prefix), or the empty string if qualified names are not available.
+   * @param atts - The attributes attached to the element. If there are no attributes, it shall be an empty Attributes object.
+   * @throws SAXException - Any SAX exception, possibly wrapping another exception.
+   */
+  public void startElement(String namespaceURI, String localName, String qName, Attributes atts)
+      throws SAXException { 
+      if(localName.equalsIgnoreCase("FirstName")){
+      
+      }else if(localName.equalsIgnoreCase("FirstName")){
+      }else if(localName.equalsIgnoreCase("MiddleName")){
+      }else if(localName.equalsIgnoreCase("LastName")){
+      }else if(localName.equalsIgnoreCase("Designation")){
+      }else if(localName.equalsIgnoreCase("Gender")){
+      }else if(localName.equalsIgnoreCase("JoiningDate")){
+      }else if(localName.equalsIgnoreCase("Address")){
+      }
+  }
+  
+  /**
+   * Receive notification of the end of an element.
+   * @param namespaceURI - The Namespace URI, or the empty string if the element has no Namespace URI or if Namespace processing is not being performed.
+   * @param localName - The local name (without prefix), or the empty string if Namespace processing is not being performed.
+   * @param qName - The qualified name (with prefix), or the empty string if qualified names are not available.
+   * @throws SAXException - Any SAX exception, possibly wrapping another exception.
+   */
+  public void endElement(String namespaceURI, String localName, String qName)
+      throws SAXException {
+
+  } 
+}

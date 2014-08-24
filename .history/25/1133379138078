@@ -1,0 +1,102 @@
+package com.ou.mtechminiproject.sandeep.finance;
+
+public class EmployeeBean  
+{
+  
+  String firstName = "";
+  String middleName = "";
+  String lastName = "";
+  String address = "";
+  String designation = "";
+  String gender = "";
+  String joiningDate = "";
+  
+  public EmployeeBean()
+  {
+  }
+
+
+  public void setFirstName(String firstName)
+  {
+    this.firstName = firstName;
+  }
+
+
+  public String getFirstName()
+  {
+    return firstName;
+  }
+
+
+  public void setMiddleName(String middleName)
+  {
+    this.middleName = middleName;
+  }
+
+
+  public String getMiddleName()
+  {
+    return middleName;
+  }
+
+
+  public void setLastName(String lastName)
+  {
+    this.lastName = lastName;
+  }
+
+
+  public String getLastName()
+  {
+    return lastName;
+  }
+
+
+  public void setAddress(String address)
+  {
+    this.address = address;
+  }
+
+
+  public String getAddress()
+  {
+    return address;
+  }
+
+
+  public void setGender(String gender)
+  {
+    this.gender = gender;
+  }
+
+
+  public String getGender()
+  {
+    return gender;
+  }
+
+
+  public void setJoiningDate(String joiningDate)
+  {
+    this.joiningDate = joiningDate;
+  }
+
+
+  public String getJoiningDate()
+  {
+    return joiningDate;
+  }
+
+
+  public void setDesignation(String designation)
+  {
+    this.designation = designation;
+  }
+
+
+  public String getDesignation()
+  {
+    return designation;
+  }
+  
+}

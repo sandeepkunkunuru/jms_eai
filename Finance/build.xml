@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+// Module: build.xml
+//
+// Author: Sandeep Kunkunuru
+// Version: 1.0
+// Creation Date:  07 January 2004
+//
+// Description: This Ant script builds the all the modules under $src and creates the
+//            distributable .jar file
+-->
+<project basedir="." default="usage" name="EFIS">
+    <!-- set global properties for this build -->
+    <property name="version" value="4.3"/>
+    <!-- Source directory location -->
+    <property name="src.dir" value="."/>
+    <!-- Build directory -->
+    <property name="build.dir" value="Build"/>
+
+    <property name="Archive.dir" value="Archive"/>
+	
+    <!--
+    Put all the dependency files under this folder.
+    -->
+    <property name="depends" value="./lib"/>
+    <property name="repository" value="./repository"/>
+    <!-- The final .jar file goes here -->
+    <property name="dist.dir" value="./miniproject"/>
+    <!-- Add any module specific CLASSPATH entries here -->
+    <path id="class.path">
+        <pathelement location="${depends}/activation.jar"/>
+        <pathelement location="${depends}/imqxm.jar"/>
+        <pathelement location="${depends}/javax.jms.jar"/>
+        <pathelement location="${depends}/jaxm-api.jar"/>
+        <pathelement location="${depends}/jms.jar"/>
+        <pathelement location="${depends}/saaj-api.jar"/>
+        <pathelement location="${depends}/saaj-impl.jar"/>       
+    </path>
+    <!--
+       The following "PatternSets" contain the .class files required to run a module
+       alongwith any dependencies they may have.
+  -->
+    <patternset id="miniproject">
+        <include name="com/ou/mtechminiproject/sandeep/finance/*.class"/>       
+    </patternset>
+    <target name="usage">
+        <echo>
+
+    EFIS build script.
+
+    These are the targets supported by this EFIS build script:
+
+    build   - compile all project files, if a certain library is missing,
+              then the compilation of its dependents are skipped.
+
+    jar     - build EFIS related jar files
+
+    dist    - Copy all the related files to the $dist folder.
+
+        </echo>
+    </target>
+    <!-- Create the build directory structure used by compile  -->
+    <target name="init">
+        <tstamp/>
+        <mkdir dir="${build.dir}"/>
+    </target>
+    <target depends="clean, init" name="build">
+        <!--  Compile the java code from ${src} into ${build}  -->
+        <javac debug="on" deprecation="on" destdir="${build.dir}" includes="**/*.java" srcdir="${src.dir}">
+            <classpath refid="class.path"/>
+        </javac>
+    </target>
+    <target name="jar" depends="build">
+        <jar jarfile="${build.dir}/EFIS.jar" basedir="${build.dir}">
+            <patternset refid="miniproject"/>
+        </jar>
+    </target>
+
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <!-- For distribution -->
+    <target name="dist" depends="jar">
+        <copy todir="${dist.dir}/lib">
+            <fileset dir="./lib">
+                <include name="${depends}/activation.jar"/>
+                <include name="${depends}/imqxm.jar"/>
+                <include name="${depends}/javax.jms.jar"/>
+                <include name="${depends}/jaxm-api.jar"/>
+                <include name="${depends}/jms.jar"/>
+                <include name="${depends}/saaj-api.jar"/>
+                <include name="${depends}/saaj-impl.jar"/>               
+            </fileset>
+            <fileset dir="./build">
+                <include name="EFIS.jar"/>
+            </fileset>
+        </copy>
+    </target>
+</project>

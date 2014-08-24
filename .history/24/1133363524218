@@ -1,0 +1,17 @@
+package com.ou.mtechminiproject.sandeep.hr;
+import java.util.ResourceBundle;
+import org.xml.sax.helpers.DefaultHandler;
+
+public class PropertiesHandler extends DefaultHandler 
+{
+    private static ResourceBundle scmBundle = null;
+
+    static {
+        scmBundle = ResourceBundle.getBundle("HRIS");
+    }
+ 
+ 
+  public PropertiesHandler()
+  {
+  }
+}
